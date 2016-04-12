@@ -1,0 +1,39 @@
+{
+  "name": "postcss-get-color",
+  "version": "0.1.0",
+  "description": "PostCSS plugin to get the prominent colors from an image.",
+  "keywords": [
+    "postcss",
+    "css",
+    "postcss-plugin",
+    "color",
+    "dominant",
+    "background-color"
+  ],
+  "author": "ismamz <ismael@isma.uy>",
+  "license": "MIT",
+  "repository": "ismamz/postcss-get-color",
+  "bugs": {
+    "url": "https://github.com/ismamz/postcss-get-color/issues"
+  },
+  "homepage": "https://github.com/ismamz/postcss-get-color",
+  "dependencies": {
+    "postcss": "^5.0.13",
+    "postcss-value-parser": "^3.3.0",
+    "node-vibrant": "^2.1.2"
+  },
+  "devDependencies": {
+    "ava": "^0.9.1",
+    "eslint": "^1.10.3",
+    "eslint-config-postcss": "^1.0.0"
+  },
+  "scripts": {
+    "test": "ava && eslint *.js"
+  },
+  "eslintConfig": {
+    "extends": "postcss/es5",
+    "rules": {
+      "max-len": [2, 100]
+    }
+  }
+}
