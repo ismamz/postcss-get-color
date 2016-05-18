@@ -75,11 +75,11 @@ and then you get:
 See examples in [Vibrant.js Page](http://jariz.github.io/vibrant.js/).
 
 - Vibrant
-- VibrantDark
-- VibrantLight
+- DarkVibrant
+- LightVibrant
 - Muted
-- MutedDark
-- MutedLight
+- DarkMuted
+- LightMuted
 
 **Note:** Always start with uppercase each word.
 
