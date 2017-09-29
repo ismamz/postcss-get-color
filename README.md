@@ -2,7 +2,7 @@
 
 <img align="right" width="135" height="95" src="http://postcss.github.io/postcss/logo-leftp.png" title="Philosopher’s stone, logo of PostCSS">
 
-> [PostCSS] plugin to get the prominent colors from an image.
+> [PostCSS] plugin to get the prominent colors from an image
 
 The plugin uses [Vibrant.js] and the [node port](https://github.com/akfish/node-vibrant) (node-vibrant). [Vibrant.js] is a javascript port of the awesome [Palette class](https://developer.android.com/reference/android/support/v7/graphics/Palette.html) in the Android support library.
 
@@ -13,40 +13,24 @@ The plugin uses [Vibrant.js] and the [node port](https://github.com/akfish/node-
 
 ## Material Design Example
 
-![Material Design Example Colors (Animated Gif)](images/material-design-example-colors.gif)
+<img src="https://media.giphy.com/media/l1J9BYEg4zGTty9wY/giphy.gif" width="300" align="right"/>
 
-The Vibrant color for the "Girl" album cover is `#e8ba3c`:
 
-![Girl](images/girl.png)
+> Based on the [standards of material design](https://material.io/guidelines/style/color.html), the palette library extracts commonly used color profiles from an image. Each profile is defined by a Target, and colors extracted from the bitmap image are scored against each profile based on saturation, luminance, and population (number of pixels in the bitmap represented by the color). For each profile, the color with the best score defines that color profile for the given image.
 
-And you can get this color writing CSS like this:
+Source: [Android Developers - Extract Color Profiles](https://developer.android.com/training/material/palette-colors.html#extract-color-profiles)
 
-```css
-.cover {
-    background-color: get-color("images/girl.png", Vibrant);
-    color: get-color("images/girl.png", Vibrant, body);
-}
-```
 
-and then you get:
+| Input         | Output        |
+|:-------------:|:-------------:|
+| <img src="https://github.com/ismamz/postcss-get-color/raw/master/images/girl.png"; width="100" height="100"/> | <img src="https://placehold.it/100/e8ba3c/fff?text=e8ba3c"/> |
+| `color: get-color("../img/girl.png", Vibrant);` | `color: #e8ba3c;` |
 
-```css
-.cover {
-    background-color: #e8ba3c;
-    color: #000;
-}
-```
 
-## How to use
+--- 
 
-- The first parameter should be a string with single quotes or double quotes.
-- The second parameter is the name from the Palette (case sensitive) ([see available names](#vibrant-palette)).
-- You can ommit the second parameter and the plugin gets the first color available in the Palette.
-- If a color is not in the Palette, the plugin gets the first color available.
-- You can add (optionally) a third parameter with the text color: `title` or `body` ([see Vibrant Palette](#vibrant-palette)).
-- Use color format in `hex`, `rgb` or `rgba` ([see Options](#options)).
 
-#### After
+### CSS Input
 
 ```css
 .foo {
@@ -58,7 +42,7 @@ and then you get:
 }
 ```
 
-#### Before
+### CSS Output
 
 ```css
 .foo {
@@ -69,6 +53,22 @@ and then you get:
     color: #b9911b;
 }
 ```
+
+## Features
+
+```
+get-color(<image-path>, [<color-name>, <text-color>])
+```
+
+**image-path** `string`: path to image relative to the CSS file (with quotes).
+
+**color-name** `string`: name (case sensitive) from the palette ([see available names](#vibrant-palette)). <br> _Default:_ first available color in the palette. 
+
+**text-color** `[title|body]`: get the compatible foreground color.
+
+
+Use color format in `hex`, `rgb` or `rgba` ([see Options](#options)).
+
 
 ## Vibrant Palette
 
@@ -81,7 +81,7 @@ See examples in [Vibrant.js Page](http://jariz.github.io/vibrant.js/).
 - DarkMuted
 - LightMuted
 
-**Note:** Always start with uppercase each word.
+**Note:** colors are writing in `PascalCase`.
 
 You can get the title text color that works best with any **'title'** text that is used over this swatch's color, and the body text color that works best with any **'body'** text that is used over this swatch's color.
 
@@ -97,17 +97,39 @@ You can get the title text color that works best with any **'title'** text that 
 
 ```css
 .foo {
-    color: #000; // or #fff
+    color: #000; /* or #fff */
 }
 ```
 
 ## Usage
 
-```js
-postcss([ require('postcss-get-color') ])
+### Quick usage
+
+Using [PostCSS CLI](https://github.com/postcss/postcss-cli) you can do the following:
+
+First, install `postcss-cli` and the plugin on your project folder:
+
+```
+$ npm install postcss-cli postcss-get-color --save-dev
 ```
 
-See [PostCSS] docs for examples for your environment.
+And finally add this script to your `package.json`:
+
+```json
+"scripts": {
+    "postcss": "postcss input.css -u postcss-get-color -o output.css -w"
+}
+```
+
+After this you can run `npm run postcss` and transform your `input.css` into `output.css`. Note that `-w` is for observe file system changes and recompile as source files change.
+
+### For tasks runners and others enviroments
+
+```js
+postcss([ require('postcss-get-color')({ /* options*/ }) ])
+```
+
+See [PostCSS] docs for examples of your environment.
 
 ## Options
 
@@ -121,4 +143,4 @@ Select the color format between: `hex`, `rgb`, `rgba`.
 
 ## Contributing
 
-If you want to improve the plugin, [send a pull request](/pull/new/master) ;-)
+If you want to improve the plugin, [send a pull request](https://github.com/ismamz/postcss-get-color/pull/new/master) ;-)

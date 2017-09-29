@@ -1,3 +1,4 @@
+var path    = require('path');
 var postcss = require('postcss');
 var parser  = require('postcss-value-parser');
 var vibrant = require('node-vibrant');
@@ -10,6 +11,11 @@ var colorNames = [
     'LightVibrant',
     'LightMuted'
 ];
+
+function isUrl(string) {
+    var matcher = /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/;
+    return matcher.test(string);
+}
 
 function getAvailable(palette) {
     var i = 0;
@@ -66,7 +72,15 @@ function getTextColor(palette, name, text) {
 
 function procDecl(image, name, decl, nodes, text, format, result) {
     return new Promise(function (resolve, reject) {
-        vibrant.from(image).getPalette(function (err, palette) {
+        var imagePath;
+
+        if (isUrl(image) || path.isAbsolute(image) || !decl.source.input.file) {
+            imagePath = image;
+        } else {
+            imagePath = path.resolve(path.dirname(decl.source.input.file), image);
+        }
+
+        vibrant.from(imagePath).getPalette(function (err, palette) {
             var color;
 
             if (!err) {
@@ -79,8 +93,8 @@ function procDecl(image, name, decl, nodes, text, format, result) {
                     }
 
                 } else {
-
-                    var newName = getAvailable(palette)[0].colorName;
+                    var availableColors = getAvailable(palette);
+                    var newName = availableColors[0].colorName;
 
                     if (text === 'title' || text === 'body') {
                         color = getTextColor(palette, newName, text);
@@ -89,11 +103,14 @@ function procDecl(image, name, decl, nodes, text, format, result) {
                     }
 
                     // Warning: color is not in the palette
+                    var availableColorsNames = availableColors.map(function (c) {
+                        return c.colorName;
+                    });
+
                     decl.warn(
-                        result, name + ' is not in the palette. We used ' +
-                        getAvailable(palette)[0].colorName +
-                         '.\nThese are the colors available:\n' +
-                        JSON.stringify( getAvailable(palette) )
+                        result, name + ' isn\'t available. ' +
+                        'First available color was used: ' +
+                        availableColorsNames.join(', ')
                     );
                 }
 
@@ -140,7 +157,7 @@ module.exports = postcss.plugin('postcss-get-color', function (opts) {
                         if (node.nodes[0].type === 'string') {
                             image = node.nodes[0].value;
                         } else {
-                            throw decl.error('Missed quotes in first argument.');
+                            throw decl.error('Missed quotes in first argument');
                         }
 
                         // Check if has 2 args and get the nameColor
@@ -179,13 +196,12 @@ module.exports = postcss.plugin('postcss-get-color', function (opts) {
         });
 
         return Promise.all(promises).then(
-            function () { // response
-                console.log('PostCSS Get Color processed ' + promises.length + ' images.');
+            function (response) {
+                console.log('\n\npostcss-get-color processed ' + response.length + ' images\n');
             },
             function (err) {
                 throw err;
             }
         );
-
     };
 });
