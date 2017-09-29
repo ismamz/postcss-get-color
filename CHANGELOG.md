@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Fix image path to be relative [#2](https://github.com/ismamz/postcss-get-color/issues/2)
 - Fix some typo issues
 - Add `test` folder and compress sample images
+- Break v0.12 of NodeJS
 
 ## v0.1.0 - 20160412
 
