@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## v0.2.0 - 20170929
+## v0.2.0, v.0.2.1 - 20170929
 
 - Improve warning message when color is missing
 - Upgrade to PostCSS v6.0.11
