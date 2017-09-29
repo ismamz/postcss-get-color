@@ -13,14 +13,12 @@ The plugin uses [Vibrant.js] and the [node port](https://github.com/akfish/node-
 
 ## Material Design Example
 
-<img src="https://media.giphy.com/media/l1J9BYEg4zGTty9wY/giphy.gif" width="300" align="right"/>
+<img src="https://media.giphy.com/media/l1J9BYEg4zGTty9wY/giphy.gif" width="235" align="right"/>
 
 
 > Based on the [standards of material design](https://material.io/guidelines/style/color.html), the palette library extracts commonly used color profiles from an image. Each profile is defined by a Target, and colors extracted from the bitmap image are scored against each profile based on saturation, luminance, and population (number of pixels in the bitmap represented by the color). For each profile, the color with the best score defines that color profile for the given image.
 
 Source: [Android Developers - Extract Color Profiles](https://developer.android.com/training/material/palette-colors.html#extract-color-profiles)
-
-<br>
 
 | Input         | Output        |
 |:-------------:|:-------------:|
