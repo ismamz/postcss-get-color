@@ -20,10 +20,11 @@ The plugin uses [Vibrant.js] and the [node port](https://github.com/akfish/node-
 
 Source: [Android Developers - Extract Color Profiles](https://developer.android.com/training/material/palette-colors.html#extract-color-profiles)
 
+<br>
 
 | Input         | Output        |
 |:-------------:|:-------------:|
-| <img src="https://github.com/ismamz/postcss-get-color/raw/master/images/girl.png"; width="100" height="100"/> | <img src="https://placehold.it/100/e8ba3c/fff?text=e8ba3c"/> |
+| <img src="https://github.com/ismamz/postcss-get-color/raw/master/test/img/girl.png" width="100" height="100"/> | <img src="https://placehold.it/100/e8ba3c/fff?text=e8ba3c"/> |
 | `color: get-color("../img/girl.png", Vibrant);` | `color: #e8ba3c;` |
 
 
@@ -46,7 +47,7 @@ Source: [Android Developers - Extract Color Profiles](https://developer.android.
 
 ```css
 .foo {
-    background-color: #b9911b url("path/to/image.jpg) no-repeat;
+    background-color: #b9911b url("path/to/image.jpg") no-repeat;
 }
 
 .bar {
