@@ -197,7 +197,10 @@ module.exports = postcss.plugin('postcss-get-color', function (opts) {
 
         return Promise.all(promises).then(
             function (response) {
+              var silent = opts.silent;
+              if(!silent) {
                 console.log('\n\npostcss-get-color processed ' + response.length + ' images\n');
+              }
             },
             function (err) {
                 throw err;
