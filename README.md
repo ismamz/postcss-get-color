@@ -140,6 +140,14 @@ Default: `hex`
 
 Select the color format between: `hex`, `rgb`, `rgba`.
 
+##### `silent`
+
+Type: `bool`
+
+Default: `false`
+
+Disable output info.
+
 ## Contributing
 
 If you want to improve the plugin, [send a pull request](https://github.com/ismamz/postcss-get-color/pull/new/master) ;-)
