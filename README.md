@@ -26,14 +26,14 @@ Source: [Android Developers - Extract Color Profiles](https://developer.android.
 | `color: get-color("../img/girl.png", Vibrant);` | `color: #e8ba3c;` |
 
 
---- 
+---
 
 
 ### CSS Input
 
 ```css
 .foo {
-    background-color: get-color("path/to/image.jpg", LightVibrant) url("path/to/image.jpg) no-repeat;
+    background-color: get-color("path/to/image.jpg", LightVibrant) url("path/to/image.jpg") no-repeat;
 }
 
 .bar {
@@ -61,7 +61,7 @@ get-color(<image-path>, [<color-name>, <text-color>])
 
 **image-path** `string`: path to image relative to the CSS file (with quotes).
 
-**color-name** `string`: name (case sensitive) from the palette ([see available names](#vibrant-palette)). <br> _Default:_ first available color in the palette. 
+**color-name** `string`: name (case sensitive) from the palette ([see available names](#vibrant-palette)). <br> _Default:_ first available color in the palette.
 
 **text-color** `[title|body]`: get the compatible foreground color.
 
@@ -139,6 +139,14 @@ Type: `string`
 Default: `hex`
 
 Select the color format between: `hex`, `rgb`, `rgba`.
+
+##### `silent`
+
+Type: `bool`
+
+Default: `false`
+
+Disable output info.
 
 ## Contributing
 
